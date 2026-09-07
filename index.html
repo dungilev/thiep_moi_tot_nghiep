@@ -268,56 +268,56 @@
     }
 
     .hero-top-deco{
-      margin-top: 42px;
-      margin-bottom: 8px;
+      margin-top: 24px;
+      margin-bottom: 4px;
       opacity:0;animation:fadeUp .8s .1s forwards;
       position: relative;
       z-index: 5;
     }
-    .hero-top-deco img { width: 120px !important; }
+    .hero-top-deco img { width: clamp(90px, 25vw, 130px) !important; }
     .hero-kicker{
       font-family:'Playfair Display',serif;
-      font-size:12px;letter-spacing:4px;text-transform:uppercase;
-      color:var(--gold);margin-bottom:6px;
+      font-size:clamp(10px, 2.5vw, 12px);letter-spacing:4px;text-transform:uppercase;
+      color:var(--gold);margin-bottom:2px;
       opacity:0;animation:fadeUp .8s .2s forwards;
       position: relative; z-index: 5;
     }
     .hero-title-sm{
-      font-family:'Playfair Display',serif;font-size:15px;
+      font-family:'Playfair Display',serif;font-size:clamp(12px, 3.5vw, 15px);
       letter-spacing:3px;color:var(--muted);text-transform:uppercase;
-      margin-bottom:6px;
+      margin-bottom:2px;
       opacity:0;animation:fadeUp .8s .3s forwards;
       position: relative; z-index: 5;
     }
     .hero-name{
       font-family:'Dancing Script',cursive;
-      font-size:clamp(52px,8vh,84px);
+      font-size:clamp(40px, 11vw, 72px);
       color:var(--dark);line-height:1.1;
-      margin:8px auto;
+      margin:4px auto;
       opacity:0;animation:fadeUp .9s .6s forwards;
       position: relative; z-index: 5;
     }
     .hero-sub{
       font-family:'Playfair Display',serif;
-      font-size:13px;
+      font-size:clamp(11px, 3vw, 13px);
       color:var(--muted);letter-spacing:2px;
-      margin-top:4px;
+      margin-top:2px;
       opacity:0;animation:fadeUp .9s .5s forwards;
       position: relative; z-index: 5;
     }
     .gold-dot{
-      width:6px;height:6px;background:var(--gold);
-      transform:rotate(45deg);margin:8px auto;
+      width:5px;height:5px;background:var(--gold);
+      transform:rotate(45deg);margin:4px auto;
       opacity:0;animation:fadeUp .9s .6s forwards;
       position: relative; z-index: 5;
     }
     .hero-time{
-      font-size:15px;color:var(--red2);font-weight:600;margin-bottom:4px;
+      font-size:clamp(13px, 3.5vw, 15px);color:var(--red2);font-weight:600;margin-bottom:2px;
       opacity:0;animation:fadeUp .9s .7s forwards;
       position: relative; z-index: 5;
     }
     .hero-location{
-      font-size:13px;color:var(--muted);line-height:1.5;
+      font-size:clamp(11px, 3vw, 13px);color:var(--muted);line-height:1.4;
       opacity:0;animation:fadeUp .9s .8s forwards;
       position: relative; z-index: 5;
     }
@@ -779,13 +779,13 @@
       <div class="flag">N</div>
     </div>
     <div class="hero-top-deco">
-       <img src="logo-hust-70.png" alt="70 Năm Bách Khoa" style="width: 160px; height: auto; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));" />
+       <img src="logo-hust-70.png" alt="70 Năm Bách Khoa" style="height: auto; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));" />
     </div>
 
     <p class="hero-kicker">Thư Mời Tham Dự</p>
     <p class="hero-title-sm">Lễ Tốt Nghiệp Của</p>
     <h1 class="hero-name">Lê Tiến Dũng</h1>
-    <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block;color: var(--gold); font-weight: 700; font-size: 18px; margin-top: 6px; min-height: 26px;"></span></p>
+    <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block;color: var(--gold); font-weight: 700; font-size: clamp(15px, 4.5vw, 18px); margin-top: 4px; min-height: 22px;"></span></p>
     
     <div class="gold-dot"></div>
     <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 15h - 17h</p>
@@ -885,7 +885,7 @@ function openEnvelope(){
   env.classList.add('open');
   
   if(!playing) {
-    audio.currentTime = 124;
+    audio.currentTime = 123;
     toggleMusic();
   }
 
@@ -910,7 +910,7 @@ function toggleMusic(){
 }
 
 audio.addEventListener('ended', () => {
-  audio.currentTime = 124;
+  audio.currentTime = 123;
   audio.play();
 });
 
