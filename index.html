@@ -398,7 +398,7 @@
     .cal-mini {
       width: 100%;
       max-width: 320px;
-      margin: 0 auto 40px;
+      margin: 0 auto clamp(20px, 3vh, 40px);
       background: #ffffff;
       border-radius: 16px;
       overflow: hidden;
@@ -409,7 +409,7 @@
     .cal-mini-top {
       background: var(--red);
       color: #fff;
-      padding: 20px 24px;
+      padding: clamp(12px, 2vh, 20px) 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -421,8 +421,8 @@
     .cal-mini-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      row-gap: 16px;
-      padding: 24px 16px 32px;
+      row-gap: clamp(8px, 2vh, 16px);
+      padding: clamp(16px, 3vh, 24px) 16px;
       font-size: 15px;
       font-weight: 500;
       font-family: 'Be Vietnam Pro', sans-serif;
@@ -476,12 +476,13 @@
       font-size:clamp(22px,5vw,36px);
       color:#fff;margin-bottom:40px;
     }
-    .cd-grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+    .cd-grid{display:flex;flex-wrap:wrap;gap:clamp(8px, 1.5vw, 16px);justify-content:center}
     .cd-item{
       background:rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.15);
       border-radius:4px;
-      padding:24px 28px;min-width:90px;
+      padding:clamp(16px, 3vw, 24px) clamp(16px, 4vw, 28px);
+      min-width:clamp(60px, 20vw, 90px);
       text-align:center;backdrop-filter:blur(8px);
       transition:transform .3s;
     }
@@ -506,12 +507,12 @@
     .sec-kicker{
       font-family:'Playfair Display',serif;font-size:10px;
       letter-spacing:4px;text-transform:uppercase;
-      color:var(--gold);margin-bottom:8px;
+      color:var(--gold);margin-bottom:4px;
     }
     .sec-title{
       font-family:'Playfair Display',serif;
-      font-size:clamp(24px,5vw,38px);
-      color:var(--dark);margin-bottom:32px;
+      font-size:clamp(24px,6vw,38px);
+      color:var(--dark);margin-bottom:clamp(16px,3vh,32px);
     }
     .letter-card{
       background:var(--card);
@@ -864,12 +865,10 @@
   <section id="thanks-section" class="reveal">
     <p class="thanks-kicker">◆ Cảm Ơn ◆</p>
     <h2 class="thanks-dash">– Cảm Ơn –</h2>
-    <p class="thanks-body">
-      Ngày hôm nay không chỉ là cột mốc của riêng mình,<br/>
-      mà còn là thành quả của sự yêu thương và động viên từ mọi người.<br/>
-      Sự hiện diện của bạn sẽ là niềm vui lớn<br/>
-      trong ngày đặc biệt này.
-    </p>
+      <p class="thanks-body">
+        Ngày hôm nay không chỉ là cột mốc của riêng mình, mà còn là thành quả của sự yêu thương và động viên từ mọi người.<br/><br/>
+        Sự hiện diện của bạn sẽ là niềm vui lớn trong ngày đặc biệt này.
+      </p>
     <p class="thanks-sig">Lê Tiến Dũng</p>
   </section>
 
