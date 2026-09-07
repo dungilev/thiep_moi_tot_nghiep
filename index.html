@@ -534,15 +534,33 @@
     }
 
     /* ── MAP ── */
-    #map-section{padding:clamp(20px, 4vh, 60px) 24px;max-width:800px;margin:0 auto;text-align:center}
-    .map-wrap{
-      border-radius:4px;overflow:hidden;
-      border:1px solid var(--border);
-      box-shadow:0 8px 40px rgba(0,0,0,.08);
-      margin-top:32px;
+    #map-section{
+      padding:clamp(20px, 4vh, 60px) 24px;
+      max-width:800px;
+      margin:0 auto;
+      text-align:center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    .map-wrap iframe{width:100%;height:360px;border:none;display:block}
-    .map-btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+    .map-wrap{
+      border-radius:4px;
+      margin-top:20px;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: block;
+    }
+    .map-btn-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px; flex-shrink: 0;}
 
     /* ── WISH FORM ── */
     #wish-section{
@@ -811,15 +829,10 @@
     <h2 class="sec-title">Hội Trường C2 – HUST</h2>
     <p style="color:var(--muted);font-size:15px">1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
     <div class="map-wrap">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.5893862624226!2d105.8427!3d21.0045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac4421af7399%3A0x2a3d01fe0d0a7d4b!2zVHLGsOG7nW5nIMSQYWkgaOG7jWMgQsOhY2gga2hvYSBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1699000000000!5m2!1svi!2s"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        title="Bản đồ Hội Trường C2 HUST">
-      </iframe>
+      <img src="media__1788802443047.png" alt="Bản đồ Hội Trường C2 HUST">
     </div>
     <div class="map-btn-row">
-      <a href="https://maps.google.com/?q=Dai+hoc+Bach+Khoa+Ha+Noi,+1+Dai+Co+Viet,+Ha+Noi"
-         target="_blank" rel="noopener noreferrer" class="btn btn-primary">🗺 Google Maps</a>
+      <a href="media__1788802443047.png" download="Ban_do_C2_HUST.png" class="btn btn-primary" onclick="forceDownload(event, this.href, this.download)">⬇️ Tải Ảnh Bản Đồ</a>
     </div>
   </section>
 
@@ -993,6 +1006,22 @@ const guestName = urlParams.get('to');
 if (guestName) {
   const guestSpan = document.getElementById('guest-name');
   if (guestSpan) guestSpan.textContent = " " + guestName.toUpperCase();
+}
+
+/* ── TẢI BẢN ĐỒ VỀ MÁY ─────────────────────────── */
+function forceDownload(e, url, filename) {
+  e.preventDefault();
+  fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+    .catch(console.error);
 }
 </script>
 </body>
