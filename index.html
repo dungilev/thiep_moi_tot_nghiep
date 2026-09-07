@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -745,7 +751,7 @@
 <button id="music-btn" title="Bật/tắt nhạc nền" onclick="toggleMusic()">
   <div class="vinyl" id="vinyl-disc"></div>
 </button>
-<audio id="bg-music" loop>
+<audio id="bg-music">
   <source src="thangnam.webm" type="audio/webm"/>
 </audio>
 
@@ -782,9 +788,8 @@
     <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block;color: var(--gold); font-weight: 700; font-size: 18px; margin-top: 6px; min-height: 26px;"></span></p>
     
     <div class="gold-dot"></div>
-
-    <p class="hero-time">26/09/2026 &nbsp;|&nbsp; Lúc 15:00 - 17:00</p>
-    <p class="hero-location">Đại học Bách Khoa Hà Nội<br/>Hội trường C2, 1 Đại Cồ Việt</p>
+    <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 15h - 17h</p>
+    <p class="hero-location">Đại học Bách Khoa Hà Nội<br/>Hội trường C2, Số 1 Đại Cồ Việt</p>
 
     <div class="hero-illustration">
        <div class="avatar-container">
@@ -827,7 +832,7 @@
   <section id="map-section" class="reveal">
     <p class="sec-kicker">◆ Địa Điểm ◆</p>
     <h2 class="sec-title">Hội Trường C2 – HUST</h2>
-    <p style="color:var(--muted);font-size:15px">1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
+    <p style="color:var(--muted);font-size:15px">Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
     <div class="map-wrap">
       <img src="media__1788802443047.png" alt="Bản đồ Hội Trường C2 HUST">
     </div>
@@ -880,7 +885,7 @@ function openEnvelope(){
   env.classList.add('open');
   
   if(!playing) {
-    audio.currentTime = 103;
+    audio.currentTime = 124;
     toggleMusic();
   }
 
@@ -903,6 +908,11 @@ function toggleMusic(){
   playing ? audio.play() : audio.pause();
   musicBtn.classList.toggle('playing', playing);
 }
+
+audio.addEventListener('ended', () => {
+  audio.currentTime = 124;
+  audio.play();
+});
 
 /* ── CONFETTI ──────────────────────────────────── */
 const canvas = document.getElementById('confetti-canvas');
