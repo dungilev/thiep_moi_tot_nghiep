@@ -268,8 +268,8 @@
     }
 
     .hero-top-deco{
-      margin-top: clamp(24px, 5vh, 60px);
-      margin-bottom: clamp(4px, 1.5vh, 12px);
+      margin-top: 24px;
+      margin-bottom: 4px;
       opacity:0;animation:fadeUp .8s .1s forwards;
       position: relative;
       z-index: 5;
@@ -278,14 +278,14 @@
     .hero-kicker{
       font-family:'Playfair Display',serif;
       font-size:clamp(10px, 2.5vw, 12px);letter-spacing:4px;text-transform:uppercase;
-      color:var(--gold);margin-bottom:clamp(2px, 1vh, 8px);
+      color:var(--gold);margin-bottom:2px;
       opacity:0;animation:fadeUp .8s .2s forwards;
       position: relative; z-index: 5;
     }
     .hero-title-sm{
       font-family:'Playfair Display',serif;font-size:clamp(12px, 3.5vw, 15px);
       letter-spacing:3px;color:var(--muted);text-transform:uppercase;
-      margin-bottom:clamp(2px, 1vh, 8px);
+      margin-bottom:2px;
       opacity:0;animation:fadeUp .8s .3s forwards;
       position: relative; z-index: 5;
     }
@@ -293,7 +293,7 @@
       font-family:'Dancing Script',cursive;
       font-size:clamp(40px, 11vw, 72px);
       color:var(--dark);line-height:1.1;
-      margin:clamp(4px, 2vh, 16px) auto;
+      margin:4px auto;
       opacity:0;animation:fadeUp .9s .6s forwards;
       position: relative; z-index: 5;
     }
@@ -301,7 +301,7 @@
       font-family:'Playfair Display',serif;
       font-size:clamp(11px, 3vw, 13px);
       color:var(--muted);letter-spacing:2px;
-      margin-top:clamp(2px, 1vh, 8px);
+      margin-top:2px;
       opacity:0;animation:fadeUp .9s .5s forwards;
       position: relative; z-index: 5;
     }
@@ -312,14 +312,12 @@
       position: relative; z-index: 5;
     }
     .hero-time{
-      font-size:clamp(13px, 3.5vw, 15px);color:var(--red2);font-weight:600;margin-bottom:clamp(2px, 1vh, 8px);
+      font-size:clamp(13px, 3.5vw, 15px);color:var(--red2);font-weight:600;margin-bottom:2px;
       opacity:0;animation:fadeUp .9s .7s forwards;
       position: relative; z-index: 5;
-      margin-top: clamp(8px, 3vh, 24px);
     }
     .hero-location{
       font-size:clamp(11px, 3vw, 13px);color:var(--muted);line-height:1.4;
-      margin-bottom:clamp(10px, 3vh, 32px);
       opacity:0;animation:fadeUp .9s .8s forwards;
       position: relative; z-index: 5;
     }
@@ -793,7 +791,7 @@
     <p class="hero-kicker">Thư Mời Tham Dự</p>
     <p class="hero-title-sm">Lễ Tốt Nghiệp Của</p>
     <h1 class="hero-name">Lê Tiến Dũng</h1>
-    <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block;color: var(--gold); font-weight: 700; font-size: clamp(15px, 4.5vw, 18px); margin-top: clamp(4px, 1vh, 8px); min-height: 22px;"></span></p>
+    <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block; color: var(--gold); font-weight: 700; font-size: clamp(15px, 4.5vw, 18px); margin-top: 4px; height: 22px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span></p>
     
     <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 16h - 17h</p>
     <p class="hero-location">Đại học Bách Khoa Hà Nội<br/>Hội trường C2, Số 1 Đại Cồ Việt</p>
@@ -907,25 +905,9 @@ function openEnvelope(){
 const audio = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 let playing = false;
-let audioCtx;
-
-function initAudioBoost() {
-  if (audioCtx) return;
-  try {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const track = audioCtx.createMediaElementSource(audio);
-    const gainNode = audioCtx.createGain();
-    gainNode.gain.value = 2.5; /* Tăng âm lượng 250% */
-    track.connect(gainNode).connect(audioCtx.destination);
-  } catch(e) { console.error(e); }
-}
 
 function toggleMusic(){
-  if (!audioCtx) initAudioBoost();
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  
+  const hasSrc = audio.src || audio.querySelector('source');
   playing = !playing;
   playing ? audio.play() : audio.pause();
   musicBtn.classList.toggle('playing', playing);
