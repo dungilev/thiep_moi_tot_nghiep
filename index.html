@@ -963,32 +963,24 @@ const musicBtn = document.getElementById('music-btn');
 let playing = false;
 let audioCtx;
 
-function isMobile() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 function initAudioBoost() {
   if (audioCtx) return;
-  if (!isMobile()) return; /* Only boost on mobile */
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     audioCtx = new AudioContext();
     const track = audioCtx.createMediaElementSource(audio);
     const gainNode = audioCtx.createGain();
-    gainNode.gain.value = 2.5; /* 250% volume */
+    gainNode.gain.value = 4.0; /* 400% - works on HTTPS */
     track.connect(gainNode).connect(audioCtx.destination);
   } catch(e) { console.error(e); }
 }
 
 function toggleMusic(){
-  if (isMobile()) {
-    if (!audioCtx) initAudioBoost();
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+  if (!audioCtx) initAudioBoost();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
   }
-  
   const hasSrc = audio.src || audio.querySelector('source');
   playing = !playing;
   playing ? audio.play() : audio.pause();
