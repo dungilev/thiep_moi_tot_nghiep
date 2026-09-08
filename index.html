@@ -348,6 +348,37 @@
       display: block;
       position: relative;
     }
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--muted);
+      font-size: 10px;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+    .scroll-hint.left { left: calc(50% - 165px); transform: translateX(-50%); }
+    .scroll-hint.right { right: calc(50% - 165px); transform: translateX(50%); }
+    .scroll-hint-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: bounce 2s infinite;
+    }
+    .scroll-arrow {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      margin-top: 6px;
+    }
     .floral-bottom {
       position: absolute;
       bottom: -20px;
@@ -692,13 +723,14 @@
     .btn-outline:hover{background:var(--red);color:#fff;transform:translateY(-2px)}
 
     /* ── REVEAL ── */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
-    .reveal.visible{opacity:1;transform:none}
-
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(20px)}
-      to{opacity:1;transform:none}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
     }
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s ease-out}
+    .reveal.visible{opacity:1;transform:none}
 
     @media(max-width:600px){
       .letter-card{padding:32px 22px}
@@ -794,8 +826,21 @@
     <h1 class="hero-name">Lê Tiến Dũng</h1>
     <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block; color: var(--gold); font-weight: 700; font-size: clamp(15px, 4.5vw, 18px); margin-top: 8px; height: 26px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span></p>
     
-    <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 16h - 17h</p>
+    <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 15h - 17h</p>
     <p class="hero-location">Đại học Bách Khoa Hà Nội<br/>Hội trường C2, Số 1 Đại Cồ Việt</p>
+    
+    <div class="scroll-hint left">
+      <div class="scroll-hint-inner">
+        <span>Cuộn xuống</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+    <div class="scroll-hint right">
+      <div class="scroll-hint-inner">
+        <span>Cuộn xuống</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
 
     <div class="hero-illustration">
        <div class="avatar-container">
@@ -958,7 +1003,7 @@ function launchConfetti(){
 
 /* ── COUNTDOWN ─────────────────────────────────── */
 // 🔧 ĐỔI NGÀY TẠI ĐÂY:
-const TARGET = new Date('2026-09-26T16:00:00+07:00');
+const TARGET = new Date('2026-09-26T15:00:00+07:00');
 function pad(n){return String(n).padStart(2,'0')}
 function tick(){
   const d=TARGET-new Date();
