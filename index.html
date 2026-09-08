@@ -970,9 +970,20 @@ function initAudioBoost() {
     if (!AudioContext) return;
     audioCtx = new AudioContext();
     const track = audioCtx.createMediaElementSource(audio);
+    
+    // Dung DynamicsCompressor de tang am luong ma khong bi re (clipping)
+    const compressor = audioCtx.createDynamicsCompressor();
+    compressor.threshold.value = -24; // Bat dau nen o -24dB
+    compressor.knee.value = 30;
+    compressor.ratio.value = 12;      // Ti le nen kha manh
+    compressor.attack.value = 0.003;
+    compressor.release.value = 0.25;
+
+    // Tang gain vua phai sau khi da qua compressor
     const gainNode = audioCtx.createGain();
-    gainNode.gain.value = 4.0; /* 400% - works on HTTPS */
-    track.connect(gainNode).connect(audioCtx.destination);
+    gainNode.gain.value = 2.0; // Tang 200% sau nen
+
+    track.connect(compressor).connect(gainNode).connect(audioCtx.destination);
   } catch(e) { console.error(e); }
 }
 
