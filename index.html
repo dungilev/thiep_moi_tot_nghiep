@@ -795,7 +795,7 @@
     <h1 class="hero-name">Lê Tiến Dũng</h1>
     <p class="hero-sub">HÂN HẠNH MỜI<br><span id="guest-name" style="display:block;color: var(--gold); font-weight: 700; font-size: clamp(15px, 4.5vw, 18px); margin-top: clamp(4px, 1vh, 8px); min-height: 22px;"></span></p>
     
-    <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 15h - 17h</p>
+    <p class="hero-time">26/09/2026 &nbsp;|&nbsp; 16h - 17h</p>
     <p class="hero-location">Đại học Bách Khoa Hà Nội<br/>Hội trường C2, Số 1 Đại Cồ Việt</p>
 
     <div class="hero-illustration">
@@ -907,9 +907,25 @@ function openEnvelope(){
 const audio = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 let playing = false;
+let audioCtx;
+
+function initAudioBoost() {
+  if (audioCtx) return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const track = audioCtx.createMediaElementSource(audio);
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.value = 2.5; /* Tăng âm lượng 250% */
+    track.connect(gainNode).connect(audioCtx.destination);
+  } catch(e) { console.error(e); }
+}
 
 function toggleMusic(){
-  const hasSrc = audio.src || audio.querySelector('source');
+  if (!audioCtx) initAudioBoost();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
   playing = !playing;
   playing ? audio.play() : audio.pause();
   musicBtn.classList.toggle('playing', playing);
@@ -959,7 +975,7 @@ function launchConfetti(){
 
 /* ── COUNTDOWN ─────────────────────────────────── */
 // 🔧 ĐỔI NGÀY TẠI ĐÂY:
-const TARGET = new Date('2026-09-26T15:00:00+07:00');
+const TARGET = new Date('2026-09-26T16:00:00+07:00');
 function pad(n){return String(n).padStart(2,'0')}
 function tick(){
   const d=TARGET-new Date();
